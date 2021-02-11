@@ -10,8 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     private lazy var mainView: MainView = {
         let view = MainView(buttonAction: { [weak self] in
-            guard let self = self else { return }
-            self.navigator.navigateToDetail(from: self)
+            self?.navigateToDetail()
         })
         view.isHidden = true
         return view
@@ -100,7 +99,17 @@ class MainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = !isShowing
     }
     
-    @objc private func didTapNewPokemon() {
+    private func presentAlert() {
+        let alert = UIAlertController(title: Strings.alertTitle, message: Strings.alertMessage, preferredStyle: .alert)
+        alert.addAction(.init(title: Strings.alertButtonTitle, style: .default, handler: { [weak self] _ in
+            self?.fetchData()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Internal functions
+    
+    @objc func didTapNewPokemon() {
         navigationItem.rightBarButtonItem?.isEnabled = false
         showLoading(isShowing: true)
         viewModel.fetchMainData(then: { [weak self] result in
@@ -113,12 +122,8 @@ class MainViewController: UIViewController {
         })
     }
     
-    func presentAlert() {
-        let alert = UIAlertController(title: Strings.alertTitle, message: Strings.alertMessage, preferredStyle: .alert)
-        alert.addAction(.init(title: Strings.alertButtonTitle, style: .default, handler: { [weak self] _ in
-            self?.fetchData()
-        }))
-        present(alert, animated: true, completion: nil)
+    @objc func navigateToDetail() {
+        navigator.navigateToDetail(from: self)
     }
 }
 
@@ -130,7 +135,7 @@ extension MainViewController {
     }
     
     struct Strings {
-        static let alertTitle = "Sorry 😢"
+        static let alertTitle = "Sorry😢"
         static let alertMessage = "Unable to fetch your favorite pokemon"
         static let alertButtonTitle = "Try again"
     }
