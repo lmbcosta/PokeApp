@@ -19,6 +19,10 @@ Service | Manages network calls to PokeAPI
 PokeApp has only **1** external dependency:</p>
 **[KingFisher](https://github.com/onevcat/Kingfisher)**: A lightweight, pure-Swift library for downloading and caching images from the web. It was decided to use it to cache and download all Pokemon images.</p>
 
+
+## Unit Tests
+This app is covered with unit tests around all existing layers
+
 ## Dependency Manager
 As dependency manager it was used Swift Package Manager (SPM).
 
