@@ -22,10 +22,8 @@ class ProviderTests: XCTestCase {
         // When
         let cachedModel = sut.getCachedModel()
         
-        
         // Then
-        //XCTAssertNil(cachedModel)
-        XCTAssertNotNil(cachedModel)
+        XCTAssertNil(cachedModel)
     }
     
     func testProviderWithCache() {
