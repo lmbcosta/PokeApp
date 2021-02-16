@@ -24,7 +24,8 @@ class ProviderTests: XCTestCase {
         
         
         // Then
-        XCTAssertNil(cachedModel)
+        //XCTAssertNil(cachedModel)
+        XCTAssertNotNil(cachedModel)
     }
     
     func testProviderWithCache() {
